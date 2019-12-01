@@ -1,0 +1,3 @@
+[submodule "DAW/DAW/App_Data"]
+	path = DAW/DAW/App_Data
+	url = git@github.com:cluntraru/DAW-database.git
