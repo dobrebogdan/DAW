@@ -17,6 +17,12 @@ namespace DAW {
             );
 
             routes.MapRoute(
+                name: "Category",
+                url: "category/Show/{id}",
+                defaults: new { controller = "Category", action = "Show" }
+            );
+
+            routes.MapRoute(
                 name: "Subject",
                 url: "{category}/{subject}",
                 defaults: new { controller = "Subject", action = "Index"}

@@ -1,0 +1,12 @@
+﻿@foreach (var subject in ViewBag.Subjects)
+{
+    @Html.Label("Title", "Denumire subiect")
+    @Html.Label("Content", "Text")
+    <p>@subject.Title</p>
+    <p>@subject.Content</p>
+    <a class="btn btn-success" href="/Subject/Show/1">Afisare subiect</a>
+    <a class="btn btn-success" href="/Subject/Edit/1">Editare subiect</a>
+    <br />
+    <hr />
+    <br />
+}

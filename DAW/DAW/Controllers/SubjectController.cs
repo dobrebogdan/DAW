@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAW.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,10 @@ namespace DAW.Controllers
         // GET: Subject
         public ActionResult Index()
         {
+            List<Subject> subjects = new List<Subject>();
+            subjects.Add(new Subject("Titlu 1", "Continut"));
+            subjects.Add(new Subject("Titlu 2", "Continut"));
+            ViewBag.Subjects = subjects;
             return View();
         }
 
