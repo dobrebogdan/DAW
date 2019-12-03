@@ -10,8 +10,9 @@ namespace DAW.Models
     {
         [Key]
         public int Id { get; set; }
-        public Subject(string title, string content)
+        public Subject(int id, string title, string content)
         {
+            Id = id;
             Title = title;
             Content = content;
         }
