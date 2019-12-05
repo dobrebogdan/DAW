@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Net;
 
 namespace DAW.Controllers
 {
@@ -27,8 +28,20 @@ namespace DAW.Controllers
 
     public class CategoryController : Controller
     {
-        // GET: Category
+        
         public ActionResult Index()
+        {
+
+            List<Category> categories = new List<Category>();
+            categories.Add(new Category(0, "Categoria 1"));
+            categories.Add(new Category(1, "Categoria 2"));
+            categories.Add(new Category(2, "Categoria 3"));
+            ViewBag.Categories = categories;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Index(String searchString)
         {
 
             List<Category> categories = new List<Category>();

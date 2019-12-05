@@ -42,7 +42,7 @@ namespace DAW {
 
             routes.MapRoute(
                 name: "Subject",
-                url: "{category}/{subject}",
+                url: "category/subject",
                 defaults: new { controller = "Subject", action = "Index"}
             );
 

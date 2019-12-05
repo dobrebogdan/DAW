@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<script>
+    function searchCategories() {
+        window.open("/Category/Index");
+    }
+    function searchMessages() {
+        window.open("/Message/Index");
+    }
+</script>
+
+
+<!--Complete search by adding required functions-->
+<h2>Search (needs fix)</h2>
+<form asp-controller="Category" asp-action="Index" method="post">
+    <p>
+        Title: <input type="text" name="SearchString">
+        <input type="submit" value="Search Categories" onclick="searchCategories()"/>
+    </p>
+</form>
+<br />
+<br />
+<form asp-controller="Message" asp-action="Index" method="post">
+    <p>
+        Title: <input type="text" name="SearchString">
+        <input type="submit" value="Search Messages" onclick="searchMessages()" />
+    </p>
+</form>
