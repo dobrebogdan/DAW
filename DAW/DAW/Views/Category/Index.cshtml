@@ -5,6 +5,12 @@
 <h2>@ViewBag.Title</h2>
 <br />
 
+<a class="btn btn-success" href="/Category/indexbyname">Sort by name</a>
+<a class="btn btn-success" href="/Category/indexbysubjects">Sort by number of subjects</a>
+<br />
+<hr />
+<br />
+
 @foreach (var category in ViewBag.Categories)
 {
     @Html.Label("CategoryName", "Denumire categorie")

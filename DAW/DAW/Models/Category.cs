@@ -20,6 +20,6 @@ namespace DAW.Models
         [Required(ErrorMessage = "Numele categoriei este obligatoriu")]
         public string CategoryName { get; set; }
 
-        public virtual ICollection<Subject> Subjects { get; set; }
+        public List <Subject> Subjects { get; set; }
     }
 }
