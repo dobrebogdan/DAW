@@ -12,8 +12,7 @@ namespace DAW.Controllers
     {
         public int Compare(Category x, Category y)
         {
-            return x.CategoryName.CompareTo(y.CategoryName);
-
+            return x.Name.CompareTo(y.Name);
         }
     }
 
@@ -22,20 +21,25 @@ namespace DAW.Controllers
         public int Compare(Category x, Category y)
         {
             return y.Subjects.Count - x.Subjects.Count;
-
         }
     }
 
     public class CategoryController : Controller
     {
+        private MessageDbContext dbContext = new MessageDbContext();
         
         public ActionResult Index()
         {
+//            List<Category> categories = new List<Category>();
+//            categories.Add(new Category(0, "Categoria 1"));
+//            categories.Add(new Category(1, "Categoria 2"));
+//            categories.Add(new Category(2, "Categoria 3"));
+//            ViewBag.Categories = categories;
+//            return View();
+            var categories = from category in dbContext.Categories
+                             orderby category.Name
+                             select category;
 
-            List<Category> categories = new List<Category>();
-            categories.Add(new Category(0, "Categoria 1"));
-            categories.Add(new Category(1, "Categoria 2"));
-            categories.Add(new Category(2, "Categoria 3"));
             ViewBag.Categories = categories;
             return View();
         }
@@ -43,7 +47,6 @@ namespace DAW.Controllers
         [HttpPost]
         public ActionResult Index(String searchString)
         {
-
             List<Category> categories = new List<Category>();
             categories.Add(new Category(0, "Categoria 1"));
             categories.Add(new Category(1, "Categoria 2"));
@@ -83,6 +86,20 @@ namespace DAW.Controllers
         public ActionResult New()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult New(Category category)
+        {
+            try
+            {
+                dbContext.Categories.Add(category);
+                dbContext.SaveChanges();
+                return RedirectToAction("Index");
+            } catch(Exception e)
+            {
+                return View();
+            }
         }
 
         public ActionResult Show(int id)
