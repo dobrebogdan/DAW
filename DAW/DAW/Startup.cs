@@ -21,7 +21,7 @@ namespace DAW
              
             	var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context)); 
              
-            	var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context)); 
+            	var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context)); 
              
             // Se adauga rolurile aplicatiei
             	if (!roleManager.RoleExists("Administrator"))
@@ -36,10 +36,10 @@ namespace DAW
             		user.UserName = "admin@admin.com";
             		user.Email = "admin@admin.com"; 
              
-                var adminCreated = UserManager.Create(user, "Administrator1!");
+                var adminCreated = userManager.Create(user, "Administrator1!");
             		if (adminCreated.Succeeded)
             		{
-            			UserManager.AddToRole(user.Id, "Administrator");
+            			userManager.AddToRole(user.Id, "Administrator");
             		}
             	} 
              
