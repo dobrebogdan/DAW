@@ -22,10 +22,12 @@ namespace DAW.Controllers
             ViewBag.Message = messages.ElementAt(id);
             return View();
         }
+
         public ActionResult Edit(int id)
         {
             return View();
         }
+
         public ActionResult New()
         {
             return View();

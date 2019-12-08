@@ -27,6 +27,6 @@ namespace DAW.Models
         public string Content { get; set; }
 
         public virtual Category Category { get; set; }
-        public virtual ICollection<Subject> Subjects { get; set; }
+        public virtual ICollection<Subject> Messages { get; set; }
     }
 }

@@ -29,10 +29,16 @@ namespace DAW {
             );
 
             routes.MapRoute(
-                name: "Categories index by name",
-                url: "category/indexbyname",
-                defaults: new { controller = "Category", action = "IndexByName" }
+                name: "Edit category",
+                url: "category/edit/{id}",
+                defaults: new { controller = "Category", action = "Edit" }
             );
+
+//            routes.MapRoute(
+//                name: "Categories index by name",
+//                url: "category/indexbyname",
+//                defaults: new { controller = "Category", action = "IndexByName" }
+//            );
 
             routes.MapRoute(
                 name: "Categories index by subjects",
