@@ -8,16 +8,12 @@ namespace DAW.Models
 {
     public class Category
     {
-        public Category()
-        {
-//            Subjects = new List<Subject>();
-        }
+        public Category() { }
 
         public Category(int id, string name)
         {
             Id = id;
             Name = name;
-//            Subjects = new List<Subject>();
         }
 
         [Key]

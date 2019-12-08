@@ -8,17 +8,13 @@ namespace DAW.Models
 {
     public class Subject
     {
-        public Subject()
-        {
-            Messages = new List<Message>();
-        }
+        public Subject() { }
 
         public Subject(int id, string title, string content)
         {
             Id = id;
             Title = title;
             Content = content;
-            Messages = new List<Message>();
         }
 
         [Key]
