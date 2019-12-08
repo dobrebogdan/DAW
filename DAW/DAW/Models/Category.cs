@@ -10,13 +10,14 @@ namespace DAW.Models
     {
         public Category()
         {
-            Subjects = new List<Subject>();
+//            Subjects = new List<Subject>();
         }
 
         public Category(int id, string name)
         {
             Id = id;
             Name = name;
+//            Subjects = new List<Subject>();
         }
 
         [Key]
@@ -27,6 +28,6 @@ namespace DAW.Models
 
         public string Description { get; set; }
 
-        public ICollection<Subject> Subjects { get; set; }
+        public virtual ICollection<Subject> Subjects { get; set; }
     }
 }

@@ -100,5 +100,25 @@ namespace DAW.Controllers
 
             return View();
         }
+
+        public ActionResult AddSubject(int categoryId)
+        {
+            ViewBag.CategoryId = categoryId;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddSubject(Subject subject)
+        {
+            try
+            {
+                dbContext.Subjects.Add(subject);
+                dbContext.SaveChanges();
+                return RedirectToAction("Show", new { id = subject.CategoryId });
+            } catch (Exception e)
+            {
+                return View();
+            }
+        }
     }
 }

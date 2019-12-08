@@ -259,6 +259,7 @@
     <Content Include="Views\Subject\New.cshtml" />
     <Content Include="Views\Subject\Edit.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Category\AddSubject.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

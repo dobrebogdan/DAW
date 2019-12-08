@@ -34,12 +34,6 @@ namespace DAW {
                 defaults: new { controller = "Category", action = "Edit" }
             );
 
-//            routes.MapRoute(
-//                name: "Categories index by name",
-//                url: "category/indexbyname",
-//                defaults: new { controller = "Category", action = "IndexByName" }
-//            );
-
             routes.MapRoute(
                 name: "Categories index by subjects",
                 url: "category/indexbysubjects",
@@ -48,14 +42,26 @@ namespace DAW {
 
             routes.MapRoute(
                 name: "Category",
-                url: "category/Show/{id}",
+                url: "category/show/{id}",
                 defaults: new { controller = "Category", action = "Show" }
             );
 
             routes.MapRoute(
-                name: "Subject",
-                url: "category/subject",
-                defaults: new { controller = "Subject", action = "Index"}
+                name: "Add subject",
+                url: "category/addsubject/{categoryId}",
+                defaults: new { controller = "Category", action = "AddSubject" }
+            );
+
+            routes.MapRoute(
+                name: "Edit subject",
+                url: "subject/edit/{id}",
+                defaults: new { controller = "Subject", action = "Edit" }
+            );
+
+            routes.MapRoute(
+                name: "Show subject",
+                url: "subject/show/{id}",
+                defaults: new { controller = "Subject", action = "Show"}
             );
 
             routes.MapRoute(

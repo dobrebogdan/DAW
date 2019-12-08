@@ -8,13 +8,17 @@ namespace DAW.Models
 {
     public class Subject
     {
-        public Subject() { }
+        public Subject()
+        {
+            Messages = new List<Message>();
+        }
 
         public Subject(int id, string title, string content)
         {
             Id = id;
             Title = title;
             Content = content;
+            Messages = new List<Message>();
         }
 
         [Key]
@@ -26,7 +30,9 @@ namespace DAW.Models
         [Required(ErrorMessage = "Descrierea subiectului este obligatorie")]
         public string Content { get; set; }
 
+        public int CategoryId { get; set; }
+
         public virtual Category Category { get; set; }
-        public virtual ICollection<Subject> Messages { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
     }
 }

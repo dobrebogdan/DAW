@@ -9,6 +9,8 @@ namespace DAW.Controllers
 {
     public class SubjectController : Controller
     {
+        private MessageDbContext dbContext = new MessageDbContext();
+
         // GET: Subject
         public ActionResult Index()
         {
@@ -20,11 +22,6 @@ namespace DAW.Controllers
         }
 
         public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        public ActionResult New()
         {
             return View();
         }
