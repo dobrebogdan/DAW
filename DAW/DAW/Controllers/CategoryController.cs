@@ -92,8 +92,7 @@ namespace DAW.Controllers
         public ActionResult Show(int id)
         {
             Category category = dbContext.Categories.Find(id);
-            var subjects = from sub in category.Subjects
-                           select sub;
+            var subjects = from sub in category.Subjects select sub;
 
             ViewBag.Category = category;
             ViewBag.Subjects = subjects;

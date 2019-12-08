@@ -5,3 +5,32 @@
 
 <h2>Edit</h2>
 
+<form method="post" action="/subject/edit/@ViewBag.Subject.Id">
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+    <label> Titlu subiect </label>
+    <br />
+    <input type="text" name="Title" />
+    <br />
+    <label> Descriere subiect </label>
+    <br />
+    <input type="text" name="Content" />
+    <br />
+    <label> Categorie </label>
+    <br />
+    <select name="CategoryId">
+        @foreach(var category in ViewBag.Categories)
+        {
+            <option @if(category.Id == ViewBag.Category.Id)
+                    {
+                        @: selected="selected"
+                    }
+                    value="@category.Id"
+            >
+                @category.Name
+            </option>
+        }
+    </select>
+    <br />
+    <br />
+    <button class="btn btn-success" type="submit">Actualizeaza subiect</button>
+</form>
