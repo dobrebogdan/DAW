@@ -22,6 +22,8 @@ namespace DAW.Models
         [Required(ErrorMessage = "Numele categoriei este obligatoriu")]
         public string Name { get; set; }
 
+        public string Description { get; set; }
+
         public ICollection<Subject> Subjects { get; set; }
     }
 }
