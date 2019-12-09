@@ -4,28 +4,17 @@
 }
 
 <script>
-    function searchCategories() {
-        window.open("/Category/Index");
-    }
-    function searchMessages() {
-        window.open("/Message/Index");
+    function searchTerm() {
+        var searchText = document.getElementById("searchBox").value;
+        window.open("/search/find/" + searchText);
     }
 </script>
 
 
-<!--Complete search by adding required functions-->
-<h2>Search (needs fix)</h2>
+<h2>Search</h2>
 <form asp-controller="Category" asp-action="Index" method="post">
     <p>
-        Title: <input type="text" name="SearchString">
-        <input type="submit" value="Search Categories" onclick="searchCategories()"/>
-    </p>
-</form>
-<br />
-<br />
-<form asp-controller="Message" asp-action="Index" method="post">
-    <p>
-        Title: <input type="text" name="SearchString">
-        <input type="submit" value="Search Messages" onclick="searchMessages()" />
+        Title: <input type="text" name="SearchString" id="searchBox">
+        <input type="submit" value="Search Forum" onclick="searchTerm()"/>
     </p>
 </form>

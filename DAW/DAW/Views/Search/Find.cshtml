@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Find";
+}
+
+<h2>Subjects</h2>
+
+@foreach (var subject in ViewBag.Subjects)
+{
+    //    @Html.Label("Name", "Nume Categorie")
+    <h3> @subject.Title </h3>
+    <p>@subject.Content</p>
+    <a class="btn btn-success" href="/subject/show/@subject.Id">Show subject</a>
+    <br />
+    <hr />
+    <br />
+}
+
+<h2>Messages</h2>
+<br />
+
+@foreach (var message in ViewBag.Messages)
+{
+    <p>@message.Content</p>
+    <a class="btn btn-success" href="/message/show/@message.Id">Show message</a>
+    <br />
+    <hr />
+    <br />
+}

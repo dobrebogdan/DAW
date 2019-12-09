@@ -261,6 +261,7 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Category\AddSubject.cshtml" />
     <Content Include="Views\Subject\AddMessage.cshtml" />
+    <Content Include="Views\Search\Find.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
