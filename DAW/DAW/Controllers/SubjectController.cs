@@ -57,5 +57,25 @@ namespace DAW.Controllers
 
             return View();
         }
+
+        public ActionResult AddMessage(int subjectId)
+        {
+            ViewBag.SubjectId = subjectId;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddMessage(Message message)
+        {
+            try
+            {
+                dbContext.Messages.Add(message);
+                dbContext.SaveChanges();
+                return RedirectToAction("Show", new { id = message.SubjectId });
+            } catch (Exception e)
+            {
+                return View();
+            }
+        }
     }
 }

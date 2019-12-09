@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "AddMessage";
+}
+
+<h2>AddMessage</h2>
+
+<form method="post" action="/subject/addmessage/@ViewBag.SubjectId">
+    <input type="hidden" name="SubjectId" value="@ViewBag.SubjectId" />
+    <br />
+    <label> Mesaj </label>
+    <br />
+    <input type="text" name="Content" />
+    <br />
+    <br />
+    <button class="btn btn-success" type="submit"> Adauga mesaj </button>
+</form>

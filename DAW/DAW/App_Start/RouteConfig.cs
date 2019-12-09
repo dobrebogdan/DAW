@@ -61,7 +61,13 @@ namespace DAW {
             routes.MapRoute(
                 name: "Show subject",
                 url: "subject/show/{id}",
-                defaults: new { controller = "Subject", action = "Show"}
+                defaults: new { controller = "Subject", action = "Show" }
+            );
+
+            routes.MapRoute(
+                name: "Add message",
+                url: "subject/addmessage/{subjectId}",
+                defaults: new { controller = "Subject", action = "AddMessage" }
             );
 
             routes.MapRoute(
