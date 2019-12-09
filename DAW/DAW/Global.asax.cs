@@ -18,7 +18,6 @@ namespace DAW
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-//            Database.SetInitializer<MessageDbContext>(new DropCreateDatabaseIfModelChanges<MessageDbContext>());
             Database.SetInitializer<ApplicationDbContext>(new DropCreateDatabaseIfModelChanges<ApplicationDbContext>());
         }
     }
