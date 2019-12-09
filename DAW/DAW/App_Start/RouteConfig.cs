@@ -71,6 +71,18 @@ namespace DAW {
             );
 
             routes.MapRoute(
+                name: "Show message",
+                url: "message/show/{id}",
+                defaults: new { controller = "Message", action = "Show" }
+            );
+
+            routes.MapRoute(
+                name: "Edit message",
+                url: "message/edit/{id}",
+                defaults: new { controller = "Message", action = "Edit" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Category", action = "Index", id = UrlParameter.Optional }
