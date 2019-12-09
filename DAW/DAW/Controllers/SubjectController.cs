@@ -18,6 +18,7 @@ namespace DAW.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Administrator,Moderator,User")]
         public ActionResult Edit(int id)
         {
             Subject subject = dbContext.Subjects.Find(id);
@@ -27,6 +28,7 @@ namespace DAW.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Administrator,Moderator,User")]
         [HttpPut]
         public ActionResult Edit(int id, Subject updatedSubject)
         {
@@ -59,6 +61,7 @@ namespace DAW.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Administrator,Moderator,User")]
         public ActionResult AddMessage(int subjectId)
         {
             ViewBag.SubjectId = subjectId;
@@ -66,6 +69,7 @@ namespace DAW.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Administrator,Moderator,User")]
         [HttpPost]
         public ActionResult AddMessage(Message message)
         {
@@ -78,6 +82,18 @@ namespace DAW.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpDelete]
+        public ActionResult Delete(int id)
+        {
+            Subject subject = dbContext.Subjects.Find(id);
+            int categoryId = subject.CategoryId;
+            
+            dbContext.Subjects.Remove(subject);
+            dbContext.SaveChanges();
+
+            return RedirectToAction("Show", "Category", new { id = categoryId });
         }
     }
 }

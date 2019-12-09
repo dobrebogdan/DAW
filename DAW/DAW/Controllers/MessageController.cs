@@ -11,11 +11,11 @@ namespace DAW.Controllers
     {
         private ApplicationDbContext dbContext = new ApplicationDbContext();
 
-        // GET: Message
         public ActionResult Index()
         {
             return View();
         }
+
         public ActionResult Show(int id)
         {
             Message message = dbContext.Messages.Find(id);
@@ -23,6 +23,7 @@ namespace DAW.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Administrator,Moderator,User")]
         public ActionResult Edit(int id)
         {
             Message message = dbContext.Messages.Find(id);
@@ -32,6 +33,7 @@ namespace DAW.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Administrator,Moderator,User")]
         [HttpPut]
         public ActionResult Edit(int id, Message updatedMessage)
         {
@@ -50,6 +52,18 @@ namespace DAW.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpDelete]
+        public ActionResult Delete(int id)
+        {
+            Message message = dbContext.Messages.Find(id);
+            int subjectId = message.SubjectId;
+
+            dbContext.Messages.Remove(message);
+            dbContext.SaveChanges();
+
+            return RedirectToAction("Show", "Subject", new { id = subjectId });
         }
 
         public ActionResult New()

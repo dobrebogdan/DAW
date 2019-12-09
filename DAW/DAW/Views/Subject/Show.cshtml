@@ -13,8 +13,12 @@
     @Html.Label("Title", "Denumire subiect")
     @Html.Label("Content", "Text")
     <p>@message.Content</p>
-    <a class="btn btn-success" href="/Message/Show/@message.Id">Afisare mesaj</a>
-    <a class="btn btn-success" href="/Message/Edit/@message.Id">Editare mesaj</a>
+    <a class="btn btn-success" href="/message/show/@message.Id">Afisare mesaj</a>
+    <a class="btn btn-success" href="/message/edit/@message.Id">Editare mesaj</a>
+    <form method="post" action="/message/delete/@message.Id">
+        @Html.HttpMethodOverride(HttpVerbs.Delete)
+        <button class="btn btn-success" type="submit">Stergere mesaj</button>
+    </form>
     <br />
     <hr />
     <br />
