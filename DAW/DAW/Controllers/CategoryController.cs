@@ -5,12 +5,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Net;
+using Microsoft.AspNet.Identity;
 
 namespace DAW.Controllers
 {
     public class CategoryController : Controller
     {
-        private MessageDbContext dbContext = new MessageDbContext();
+        private ApplicationDbContext dbContext = new ApplicationDbContext();
         
         public ActionResult Index()
         {
@@ -70,11 +71,14 @@ namespace DAW.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult New()
         {
+            ViewBag.UserId = User.Identity.GetUserId();
             return View();
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult New(Category category)
         {
@@ -103,6 +107,7 @@ namespace DAW.Controllers
         public ActionResult AddSubject(int categoryId)
         {
             ViewBag.CategoryId = categoryId;
+            ViewBag.UserId = User.Identity.GetUserId();
             return View();
         }
 

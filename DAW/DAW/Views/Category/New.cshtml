@@ -6,6 +6,8 @@
 <h2>New</h2>
 
 <form method="post" action="/category/new">
+    <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+    <br />
     <label> Nume categorie </label>
     <br />
     <input type="text" name="Name" />
