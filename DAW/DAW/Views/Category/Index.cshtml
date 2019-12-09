@@ -16,8 +16,12 @@
 //    @Html.Label("Name", "Nume Categorie")
     <h3> @category.Name </h3>
     <p>@category.Description</p>
-    <a class="btn btn-success" href="/Category/Show/@category.Id">Afisare categorie</a>
-    <a class="btn btn-success" href="/Category/Edit/@category.Id">Editare categorie</a>
+    <a class="btn btn-success" href="/category/show/@category.Id">Afisare categorie</a>
+    <a class="btn btn-success" href="/category/edit/@category.Id">Editare categorie</a>
+    <form method="post" action="/category/delete/@category.Id">
+        @Html.HttpMethodOverride(HttpVerbs.Delete)
+        <button class="btn btn-success" type="submit">Stergere categorie</button>
+    </form>
     <br />
     <hr />
     <br />

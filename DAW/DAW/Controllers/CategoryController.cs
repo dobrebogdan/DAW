@@ -12,7 +12,7 @@ namespace DAW.Controllers
     public class CategoryController : Controller
     {
         private ApplicationDbContext dbContext = new ApplicationDbContext();
-        
+
         public ActionResult Index()
         {
             var categories = from category in dbContext.Categories
@@ -44,6 +44,7 @@ namespace DAW.Controllers
             return View("~/Views/Category/Index.cshtml");
         }
 
+        [Authorize(Roles = "Administrator")]
         public ActionResult Edit(int id)
         {
             Category category = dbContext.Categories.Find(id);
@@ -51,6 +52,7 @@ namespace DAW.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPut]
         public ActionResult Edit(int id, Category updatedCategory)
         {
@@ -104,6 +106,7 @@ namespace DAW.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Administrator,Moderator,User")]
         public ActionResult AddSubject(int categoryId)
         {
             ViewBag.CategoryId = categoryId;
@@ -111,6 +114,7 @@ namespace DAW.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Administrator,Moderator,User")]
         [HttpPost]
         public ActionResult AddSubject(Subject subject)
         {
@@ -123,6 +127,15 @@ namespace DAW.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpDelete]
+        public ActionResult Delete(int id)
+        {
+            Category category = dbContext.Categories.Find(id);
+            dbContext.Categories.Remove(category);
+            dbContext.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

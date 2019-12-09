@@ -53,6 +53,12 @@ namespace DAW {
             );
 
             routes.MapRoute(
+                name: "Delete category",
+                url: "category/delete/{id}",
+                defaults: new { controller = "Category", action = "Delete" }
+            );
+
+            routes.MapRoute(
                 name: "Edit subject",
                 url: "subject/edit/{id}",
                 defaults: new { controller = "Subject", action = "Edit" }
@@ -71,6 +77,12 @@ namespace DAW {
             );
 
             routes.MapRoute(
+                name: "Delete subject",
+                url: "subject/delete/{id}",
+                defaults: new { controller = "Subject", action = "Delete" }
+            );
+
+            routes.MapRoute(
                 name: "Show message",
                 url: "message/show/{id}",
                 defaults: new { controller = "Message", action = "Show" }
@@ -80,6 +92,12 @@ namespace DAW {
                 name: "Edit message",
                 url: "message/edit/{id}",
                 defaults: new { controller = "Message", action = "Edit" }
+            );
+
+            routes.MapRoute(
+                name: "Delete message",
+                url: "message/delete/{id}",
+                defaults: new { controller = "Message", action = "Delete" }
             );
 
             routes.MapRoute(
