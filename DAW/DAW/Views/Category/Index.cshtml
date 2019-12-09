@@ -5,7 +5,7 @@
 <h2>@ViewBag.Title</h2>
 <br />
 
-<a class="btn btn-success" href="/Category/indexbyname">Sort by name</a>
+<a class="btn btn-success" href="/Category/index">Sort by name</a>
 <a class="btn btn-success" href="/Category/indexbysubjects">Sort by number of subjects</a>
 <br />
 <hr />
@@ -13,12 +13,17 @@
 
 @foreach (var category in ViewBag.Categories)
 {
-    @Html.Label("CategoryName", "Denumire categorie")
-    <p>@category.CategoryName</p>
-    <a class="btn btn-success" href="/Category/Show/@category.CategoryId">Afisare categorie</a>
-    <a class="btn btn-success" href="/Category/Edit/@category.CategoryId">Editare categorie</a>
+//    @Html.Label("Name", "Nume Categorie")
+    <h3> @category.Name </h3>
+    <p>@category.Description</p>
+    <a class="btn btn-success" href="/Category/Show/@category.Id">Afisare categorie</a>
+    <a class="btn btn-success" href="/Category/Edit/@category.Id">Editare categorie</a>
     <br />
     <hr />
     <br />
 }
+
+<br />
+<a class="btn btn-info" href="/category/new"> Adauga categorie </a>
+<br />
 

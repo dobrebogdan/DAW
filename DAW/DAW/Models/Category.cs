@@ -8,18 +8,22 @@ namespace DAW.Models
 {
     public class Category
     {
+        public Category() { }
+
         public Category(int id, string name)
         {
-            CategoryId = id;
-            CategoryName = name;
-            Subjects = new List<Subject>();
+            Id = id;
+            Name = name;
         }
+
         [Key]
-        public int CategoryId { get; set; }
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "Numele categoriei este obligatoriu")]
-        public string CategoryName { get; set; }
+        public string Name { get; set; }
 
-        public List <Subject> Subjects { get; set; }
+        public string Description { get; set; }
+
+        public virtual ICollection<Subject> Subjects { get; set; }
     }
 }

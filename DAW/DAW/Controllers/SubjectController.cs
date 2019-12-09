@@ -9,38 +9,73 @@ namespace DAW.Controllers
 {
     public class SubjectController : Controller
     {
+        private MessageDbContext dbContext = new MessageDbContext();
+
         // GET: Subject
         public ActionResult Index()
         {
-            List<Subject> subjects = new List<Subject>();
-            subjects.Add(new Subject(0, "Titlu 1", "Continut"));
-            subjects.Add(new Subject(1, "Titlu 2", "Continut"));
-            ViewBag.Subjects = subjects;
             return View();
         }
 
         public ActionResult Edit(int id)
         {
+            Subject subject = dbContext.Subjects.Find(id);
+            ViewBag.Subject = subject;
+            ViewBag.Categories = from category in dbContext.Categories select category;
+            ViewBag.Category = subject.Category;
             return View();
         }
 
-        public ActionResult New()
+        [HttpPut]
+        public ActionResult Edit(int id, Subject updatedSubject)
         {
-            return View();
+            try
+            {
+                Subject subject = dbContext.Subjects.Find(id);
+                if (TryUpdateModel(subject))
+                {
+                    subject.Title = updatedSubject.Title;
+                    subject.Content = updatedSubject.Content;
+                    subject.CategoryId = updatedSubject.CategoryId;
+                    dbContext.SaveChanges();
+                }
+
+                return RedirectToAction("Show", new { id = id });
+            } catch (Exception e)
+            {
+                return View();
+            }
         }
 
         public ActionResult Show(int id)
         {
-            List<Subject> subjects = new List<Subject>();
-            subjects.Add(new Subject(0, "Titlu 1", "Continut"));
-            subjects.Add(new Subject(1, "Titlu 2", "Continut"));
-            ViewBag.Subject = subjects.ElementAt(id);
+            Subject subject = dbContext.Subjects.Find(id);
+            var messages = from msg in subject.Messages select msg;
 
-            List<Message> messages = new List<Message>();
-            messages.Add(new Message(0, "Continut mesaj 1"));
-            messages.Add(new Message(1, "Continut mesaj 2"));
-            ViewBag.Messages = messages; 
+            ViewBag.Subject = subject;
+            ViewBag.Messages = messages;
+
             return View();
+        }
+
+        public ActionResult AddMessage(int subjectId)
+        {
+            ViewBag.SubjectId = subjectId;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddMessage(Message message)
+        {
+            try
+            {
+                dbContext.Messages.Add(message);
+                dbContext.SaveChanges();
+                return RedirectToAction("Show", new { id = message.SubjectId });
+            } catch (Exception e)
+            {
+                return View();
+            }
         }
     }
 }

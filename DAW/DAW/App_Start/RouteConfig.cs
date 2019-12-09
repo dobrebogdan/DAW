@@ -17,15 +17,21 @@ namespace DAW {
             );
 
             routes.MapRoute(
+                name: "New category",
+                url: "category/new",
+                defaults: new { controller = "Category", action = "New" }
+            );
+
+            routes.MapRoute(
                 name: "Categories index",
                 url: "category/index",
                 defaults: new { controller = "Category", action = "Index" }
             );
 
             routes.MapRoute(
-                name: "Categories index by name",
-                url: "category/indexbyname",
-                defaults: new { controller = "Category", action = "IndexByName" }
+                name: "Edit category",
+                url: "category/edit/{id}",
+                defaults: new { controller = "Category", action = "Edit" }
             );
 
             routes.MapRoute(
@@ -36,20 +42,50 @@ namespace DAW {
 
             routes.MapRoute(
                 name: "Category",
-                url: "category/Show/{id}",
+                url: "category/show/{id}",
                 defaults: new { controller = "Category", action = "Show" }
             );
 
             routes.MapRoute(
-                name: "Subject",
-                url: "category/subject",
-                defaults: new { controller = "Subject", action = "Index"}
+                name: "Add subject",
+                url: "category/addsubject/{categoryId}",
+                defaults: new { controller = "Category", action = "AddSubject" }
+            );
+
+            routes.MapRoute(
+                name: "Edit subject",
+                url: "subject/edit/{id}",
+                defaults: new { controller = "Subject", action = "Edit" }
+            );
+
+            routes.MapRoute(
+                name: "Show subject",
+                url: "subject/show/{id}",
+                defaults: new { controller = "Subject", action = "Show" }
+            );
+
+            routes.MapRoute(
+                name: "Add message",
+                url: "subject/addmessage/{subjectId}",
+                defaults: new { controller = "Subject", action = "AddMessage" }
+            );
+
+            routes.MapRoute(
+                name: "Show message",
+                url: "message/show/{id}",
+                defaults: new { controller = "Message", action = "Show" }
+            );
+
+            routes.MapRoute(
+                name: "Edit message",
+                url: "message/edit/{id}",
+                defaults: new { controller = "Message", action = "Edit" }
             );
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Category", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

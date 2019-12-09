@@ -8,34 +8,16 @@ using System.Net;
 
 namespace DAW.Controllers
 {
-    class CategoryNameComparer : IComparer<Category>
-    {
-        public int Compare(Category x, Category y)
-        {
-            return x.CategoryName.CompareTo(y.CategoryName);
-
-        }
-    }
-
-    class CategorySubjectComparer : IComparer<Category>
-    {
-        public int Compare(Category x, Category y)
-        {
-            return y.Subjects.Count - x.Subjects.Count;
-
-        }
-    }
-
     public class CategoryController : Controller
     {
+        private MessageDbContext dbContext = new MessageDbContext();
         
         public ActionResult Index()
         {
+            var categories = from category in dbContext.Categories
+                             orderby category.Name
+                             select category;
 
-            List<Category> categories = new List<Category>();
-            categories.Add(new Category(0, "Categoria 1"));
-            categories.Add(new Category(1, "Categoria 2"));
-            categories.Add(new Category(2, "Categoria 3"));
             ViewBag.Categories = categories;
             return View();
         }
@@ -43,41 +25,49 @@ namespace DAW.Controllers
         [HttpPost]
         public ActionResult Index(String searchString)
         {
+            var categories = from category in dbContext.Categories
+                             orderby category.Name
+                             select category;
 
-            List<Category> categories = new List<Category>();
-            categories.Add(new Category(0, "Categoria 1"));
-            categories.Add(new Category(1, "Categoria 2"));
-            categories.Add(new Category(2, "Categoria 3"));
             ViewBag.Categories = categories;
             return View();
         }
 
-        public ActionResult IndexByName()
-        {
-            List<Category> categories = new List<Category>();
-            categories.Add(new Category(0, "Categoria 1"));
-            categories.Add(new Category(1, "Categoria 2"));
-            categories.Add(new Category(2, "Categoria 3"));
-            categories.Sort(new CategoryNameComparer());
-            ViewBag.Categories = categories;
-            return View("~/Views/Category/Index.cshtml");
-        }
-        
         public ActionResult IndexBySubjects()
         {
-            List<Category> categories = new List<Category>();
-            categories.Add(new Category(0, "Categoria 1"));
-            categories.Add(new Category(1, "Categoria 2"));
-            categories.Add(new Category(2, "Categoria 3"));
-            categories.ElementAt(2).Subjects.Add(new Subject(1, "Titlu", "Continut"));
-            categories.Sort(new CategorySubjectComparer());
+            var categories = from category in dbContext.Categories
+                             orderby category.Subjects.Count
+                             select category;
+
             ViewBag.Categories = categories;
             return View("~/Views/Category/Index.cshtml");
         }
 
         public ActionResult Edit(int id)
         {
+            Category category = dbContext.Categories.Find(id);
+            ViewBag.Category = category;
             return View();
+        }
+
+        [HttpPut]
+        public ActionResult Edit(int id, Category updatedCategory)
+        {
+            try
+            {
+                Category category = dbContext.Categories.Find(id);
+                if (TryUpdateModel(category))
+                {
+                    category.Name = updatedCategory.Name;
+                    category.Description = updatedCategory.Description;
+                    dbContext.SaveChanges();
+                }
+
+                return RedirectToAction("Index");
+            } catch (Exception e)
+            {
+                return View();
+            }
         }
 
         public ActionResult New()
@@ -85,19 +75,49 @@ namespace DAW.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult New(Category category)
+        {
+            try
+            {
+                dbContext.Categories.Add(category);
+                dbContext.SaveChanges();
+                return RedirectToAction("Index");
+            } catch(Exception e)
+            {
+                return View();
+            }
+        }
+
         public ActionResult Show(int id)
         {
-            List<Category> categories = new List<Category>();
-            categories.Add(new Category(0, "Categoria 1"));
-            categories.Add(new Category(1, "Categoria 2"));
-            categories.Add(new Category(2, "Categoria 3"));
-            Category category = categories.ElementAt(id);
-            category.Subjects = new List<Subject>();
-            category.Subjects.Add(new Subject(0, "Subiect 1", "subiect 1"));
-            category.Subjects.Add(new Subject(1, "Subiect 2", "subiect 2"));
+            Category category = dbContext.Categories.Find(id);
+            var subjects = from sub in category.Subjects select sub;
+
             ViewBag.Category = category;
+            ViewBag.Subjects = subjects;
 
             return View();
+        }
+
+        public ActionResult AddSubject(int categoryId)
+        {
+            ViewBag.CategoryId = categoryId;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddSubject(Subject subject)
+        {
+            try
+            {
+                dbContext.Subjects.Add(subject);
+                dbContext.SaveChanges();
+                return RedirectToAction("Show", new { id = subject.CategoryId });
+            } catch (Exception e)
+            {
+                return View();
+            }
         }
     }
 }

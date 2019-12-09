@@ -5,3 +5,27 @@
 
 <h2>Edit</h2>
 
+<form method="post" action="/message/edit/@ViewBag.Message.Id">
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+    <label> Mesaj </label>
+    <br />
+    <input type="text" name="Content" />
+    <br />
+    <br />
+    <label> Subiect </label>
+    <select name="SubjectId">
+        @foreach(var subject in ViewBag.Subjects)
+        {
+            <option @if(subject.Id == ViewBag.Subject.Id)
+                    {
+                        @: selected="selected"
+                    }
+                    value="@subject.Id"
+            >
+                @subject.Title
+            </option>
+        }
+    </select>
+    <button class="btn btn-success" type="submit">Actualizeaza mesaj</button>
+</form>
+
