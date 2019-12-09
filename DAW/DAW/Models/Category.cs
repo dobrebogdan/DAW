@@ -18,6 +18,8 @@ namespace DAW.Models
 
         [Key]
         public int Id { get; set; }
+        public string UserId { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         [Required(ErrorMessage = "Numele categoriei este obligatoriu")]
         public string Name { get; set; }

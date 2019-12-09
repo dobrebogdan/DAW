@@ -1,4 +1,5 @@
 ﻿using DAW.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace DAW.Controllers
 {
     public class SubjectController : Controller
     {
-        private MessageDbContext dbContext = new MessageDbContext();
+        private ApplicationDbContext dbContext = new ApplicationDbContext();
 
         // GET: Subject
         public ActionResult Index()
@@ -61,6 +62,7 @@ namespace DAW.Controllers
         public ActionResult AddMessage(int subjectId)
         {
             ViewBag.SubjectId = subjectId;
+            ViewBag.UserId = User.Identity.GetUserId();
             return View();
         }
 

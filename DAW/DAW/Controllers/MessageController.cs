@@ -9,7 +9,7 @@ namespace DAW.Controllers
 {
     public class MessageController : Controller
     {
-        private MessageDbContext dbContext = new MessageDbContext();
+        private ApplicationDbContext dbContext = new ApplicationDbContext();
 
         // GET: Message
         public ActionResult Index()
