@@ -165,7 +165,7 @@ namespace DAW.Controllers
 
                     UserManager.AddToRole(user.Id, "User");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("New", "Profile", new { id = user.Id });
                 }
                 AddErrors(result);
             }

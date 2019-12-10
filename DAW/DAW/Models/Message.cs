@@ -11,11 +11,11 @@ namespace DAW.Models
     {
         public Message() { }
 
-        public Message(int id, string content)
-        {
-            Id = id;
-            Content = content;
-        }
+//        public Message(int id, string content)
+//        {
+//            Id = id;
+//            Content = content;
+//        }
 
         [Key]
         public int Id { get; set; }

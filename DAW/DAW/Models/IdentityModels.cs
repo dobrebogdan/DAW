@@ -28,6 +28,7 @@ namespace DAW.Models
         public DbSet<Message> Messages { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
 
         public static ApplicationDbContext Create()
         {

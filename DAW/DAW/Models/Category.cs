@@ -10,11 +10,11 @@ namespace DAW.Models
     {
         public Category() { }
 
-        public Category(int id, string name)
-        {
-            Id = id;
-            Name = name;
-        }
+//        public Category(int id, string name)
+//        {
+//            Id = id;
+//            Name = name;
+//        }
 
         [Key]
         public int Id { get; set; }

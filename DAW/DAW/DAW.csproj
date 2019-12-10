@@ -172,6 +172,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SubjectController.cs" />
     <Compile Include="Global.asax.cs">
@@ -179,6 +180,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\Subject.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -187,10 +189,6 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\daw_db.mdf" />
-    <Content Include="App_Data\daw_db_log.ldf">
-      <DependentUpon>daw_db.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -261,8 +259,13 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Category\AddSubject.cshtml" />
     <Content Include="Views\Subject\AddMessage.cshtml" />
+    <Content Include="Views\Profile\Show.cshtml" />
+    <Content Include="Views\Profile\New.cshtml" />
+    <Content Include="Views\Profile\Edit.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
