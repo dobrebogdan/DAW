@@ -54,7 +54,6 @@ namespace DAW.Controllers
         {
             Subject subject = dbContext.Subjects.Find(id);
             var messages = from msg in subject.Messages select msg;
-
             ViewBag.Subject = subject;
             ViewBag.Messages = messages;
 

@@ -1,26 +1,31 @@
-﻿
-@{
-    ViewBag.Title = "Show";
+﻿@{
+    ViewBag.Title = ViewBag.Category.Name;
 }
-<h2> @ViewBag.Category.Name</h2>
+
+<h2>@ViewBag.Title</h2>
+<br />
+
+<a class="btn btn-success" href="/Category/show/@ViewBag.Category.Id">Sort by name</a>
+<a class="btn btn-success" href="/Category/showbymessages/@ViewBag.Category.Id">Sort by number of messages</a>
+
+<br />
+<hr />
+<br />
+
+
+
 @foreach (var subject in ViewBag.Subjects)
 {
-    @Html.Label("")
-    <p> @subject.Title</p>
-    <p> @subject.Content</p>
-
-    <a class="btn btn-success" href="/subject/show/@subject.Id">Afisare subiect</a>
-    <a class="btn btn-success" href="/subject/edit/@subject.Id">Editare subiect</a>
-    <form method="post" action="/subject/delete/@subject.Id">
-        @Html.HttpMethodOverride(HttpVerbs.Delete)
-        <button class="btn btn-success" type="submit">Stergere subiect</button>
-    </form>
+    <h2>@subject.Title</h2>
+    <p>@subject.Content</p>
+    <a class="btn btn-success" href="/Subject/Show/@subject.Id">Afisare subiect</a>
+    <a class="btn btn-success" href="/Subject/Edit/@subject.Id">Editare subiect</a>
     <br />
     <hr />
     <br />
-
 }
 
 <br />
 <a class="btn btn-info" href="/category/addsubject/@ViewBag.Category.Id"> Adauga subiect </a>
 <br />
+

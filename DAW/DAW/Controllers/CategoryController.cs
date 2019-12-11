@@ -98,12 +98,27 @@ namespace DAW.Controllers
         public ActionResult Show(int id)
         {
             Category category = dbContext.Categories.Find(id);
-            var subjects = from sub in category.Subjects select sub;
+            var subjects = from sub in category.Subjects
+                           orderby sub.Title
+                           select sub;
 
             ViewBag.Category = category;
             ViewBag.Subjects = subjects;
 
             return View();
+        }
+
+        public ActionResult ShowByMessages(int id)
+        {
+            Category category = dbContext.Categories.Find(id);
+            var subjects = from sub in category.Subjects
+                           orderby -(sub.Messages.Count)
+                           select sub;
+
+            ViewBag.Category = category;
+            ViewBag.Subjects = subjects;
+
+            return View("~/Views/Category/Show.cshtml");
         }
 
         [Authorize(Roles = "Administrator,Moderator,User")]

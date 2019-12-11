@@ -7,11 +7,12 @@
 <h2>@ViewBag.Subject.Title</h2>
 <p>@ViewBag.Subject.Content</p>
 
+<br />
+<hr />
+<br />
 
 @foreach (var message in ViewBag.Messages)
 {
-    @Html.Label("Title", "Denumire subiect")
-    @Html.Label("Content", "Text")
     <p>@message.Content</p>
     <a class="btn btn-success" href="/message/show/@message.Id">Afisare mesaj</a>
     <a class="btn btn-success" href="/message/edit/@message.Id">Editare mesaj</a>
