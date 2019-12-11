@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form method="post" action="/profile/edit/@ViewBag.Profile.Id">
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+    <label>Descriere</label>
+    <br />
+    <input type="text" name="Description" />
+    <br />
+    <br />
+    @Html.DropDownList("updatedRole", new SelectList(ViewBag.AllRoles, "Value", "Text", (string) ViewBag.UserRole), null, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-success">Actualizeaza profil</button>
+</form>
+
