@@ -1,6 +1,8 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
@@ -28,6 +30,7 @@ namespace DAW.Models
         public DbSet<Message> Messages { get; set; }
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
 
         public static ApplicationDbContext Create()
         {

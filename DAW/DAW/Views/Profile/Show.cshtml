@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Show";
+}
+
+<h2>Show</h2>
+
+<h3>@ViewBag.Profile.Description</h3>
+
+<h2>Mesaje postate</h2>
+
+@foreach(var message in ViewBag.Messages)
+{
+    <p>@message.Content</p>
+    <a class="btn btn-success" href="/message/show/@message.Id">Afisare mesaj</a>
+    <a class="btn btn-success" href="/message/edit/@message.Id">Editare mesaj</a>
+    <form method="post" action="/message/delete/@message.Id">
+        @Html.HttpMethodOverride(HttpVerbs.Delete)
+        <button class="btn btn-success" type="submit">Stergere mesaj</button>
+    </form>
+    <br />
+}
+
+<a class="btn btn-success" href="/Manage">Manage your ACCOUNT, not profile (not this guy's, button needs to be moved)</a>

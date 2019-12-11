@@ -107,10 +107,28 @@ namespace DAW {
             );
 
             routes.MapRoute(
+                name: "New profile",
+                url: "profile/new/{userId}",
+                defaults: new { controller = "Profile", action = "New" }
+            );
+
+            routes.MapRoute(
+                name: "Show profile",
+                url: "profile/show/{id}",
+                defaults: new { controller = "Profile", action = "Show" }
+            );
+
+            routes.MapRoute(
+                name: "Edit profile",
+                url: "profile/edit/{id}",
+                defaults: new { controller = "Profile", action = "Edit" }
+            );
+
+            routes.MapRoute(
                 name: "Find term",
                 url: "search/find/{searchedTerm}",
                 defaults: new { controller = "Search", action = "Find", searchedTerm = UrlParameter.Optional}
-                );
+            );
 
             routes.MapRoute(
                 name: "Home page",

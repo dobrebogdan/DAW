@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>New</h2>
+<form method="post" action="/profile/new">
+    <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+    <br />
+    <label> Descriere </label>
+    <br />
+    <input type="text" name="Description" />
+    <br />
+    <br />
+    <button class="btn btn-success">Creeaza profil</button>
+</form>
+
