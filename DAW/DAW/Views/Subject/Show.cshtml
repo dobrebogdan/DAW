@@ -3,21 +3,21 @@
     ViewBag.Title = "Show";
 }
 
-<h2>Show</h2>
 <h2>@ViewBag.Subject.Title</h2>
 <p>@ViewBag.Subject.Content</p>
 
+<br />
+<hr />
+<br />
 
 @foreach (var message in ViewBag.Messages)
 {
-    @Html.Label("Title", "Denumire subiect")
-    @Html.Label("Content", "Text")
     <p>@message.Content</p>
     <a class="btn btn-success" href="/message/show/@message.Id">Afisare mesaj</a>
     <a class="btn btn-success" href="/message/edit/@message.Id">Editare mesaj</a>
     <form method="post" action="/message/delete/@message.Id">
         @Html.HttpMethodOverride(HttpVerbs.Delete)
-        <button class="btn btn-success" type="submit">Stergere mesaj</button>
+        <button class="btn btn-danger" type="submit">Stergere mesaj</button>
     </form>
     <br />
     <hr />
@@ -25,5 +25,5 @@
 }
 
 <br />
-<a class="btn btn-success" href="/subject/addmessage/@ViewBag.Subject.Id"> Adauga mesaj </a>
+<a class="btn btn-info" href="/subject/addmessage/@ViewBag.Subject.Id"> Adauga mesaj </a>
 <br />

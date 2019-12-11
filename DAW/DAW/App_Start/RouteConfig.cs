@@ -41,9 +41,15 @@ namespace DAW {
             );
 
             routes.MapRoute(
-                name: "Category",
+                name: "Category with subjects sorted by name",
                 url: "category/show/{id}",
                 defaults: new { controller = "Category", action = "Show" }
+            );
+
+            routes.MapRoute(
+                name: "Category with subjects sorted by messages",
+                url: "category/showbymessages/{id}",
+                defaults: new { controller = "Category", action = "ShowByMessages" }
             );
 
             routes.MapRoute(
@@ -122,6 +128,12 @@ namespace DAW {
                 name: "Find term",
                 url: "search/find/{searchedTerm}",
                 defaults: new { controller = "Search", action = "Find", searchedTerm = UrlParameter.Optional}
+            );
+
+            routes.MapRoute(
+                name: "Home page",
+                url: "home",
+                defaults: new { controller = "Category", action = "Index", id = UrlParameter.Optional }
             );
 
             routes.MapRoute(

@@ -5,8 +5,8 @@
 <h2>@ViewBag.Title</h2>
 <br />
 
-<a class="btn btn-success" href="/Category/index">Sort by name</a>
-<a class="btn btn-success" href="/Category/indexbysubjects">Sort by number of subjects</a>
+<a class="btn btn-primary" href="/Category/index">Sort by name</a>
+<a class="btn btn-primary" href="/Category/indexbysubjects">Sort by number of subjects</a>
 <br />
 <hr />
 <br />
@@ -20,7 +20,7 @@
     <a class="btn btn-success" href="/category/edit/@category.Id">Editare categorie</a>
     <form method="post" action="/category/delete/@category.Id">
         @Html.HttpMethodOverride(HttpVerbs.Delete)
-        <button class="btn btn-success" type="submit">Stergere categorie</button>
+        <button class="btn btn-danger" type="submit">Stergere categorie</button>
     </form>
     <br />
     <hr />
