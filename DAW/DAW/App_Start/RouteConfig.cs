@@ -101,6 +101,7 @@ namespace DAW {
             );
 
             routes.MapRoute(
+<<<<<<< HEAD
                 name: "New profile",
                 url: "profile/new/{userId}",
                 defaults: new { controller = "Profile", action = "New" }
@@ -117,6 +118,12 @@ namespace DAW {
                 url: "profile/edit/{id}",
                 defaults: new { controller = "Profile", action = "Edit" }
             );
+=======
+                name: "Find term",
+                url: "search/find/{searchedTerm}",
+                defaults: new { controller = "Search", action = "Find", searchedTerm = UrlParameter.Optional}
+                );
+>>>>>>> master
 
             routes.MapRoute(
                 name: "Default",
