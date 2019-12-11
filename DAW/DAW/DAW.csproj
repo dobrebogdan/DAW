@@ -259,16 +259,20 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Category\AddSubject.cshtml" />
     <Content Include="Views\Subject\AddMessage.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Profile\Show.cshtml" />
     <Content Include="Views\Profile\New.cshtml" />
     <Content Include="Views\Profile\Edit.cshtml" />
+    <Content Include="Views\Search\Find.cshtml" />
+    <Content Include="Views\Profile\Show.cshtml" />
+    <Content Include="Views\Profile\New.cshtml" />
+    <Content Include="Views\Profile\Edit.cshtml" />
+    <Content Include="Views\Search\Find.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-=======
-    <Content Include="Views\Search\Find.cshtml" />
->>>>>>> master
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
