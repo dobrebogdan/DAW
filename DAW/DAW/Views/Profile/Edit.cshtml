@@ -9,8 +9,10 @@
     @Html.HttpMethodOverride(HttpVerbs.Put)
     <label>Descriere</label>
     <br />
-    <input type="text" value="Description" />
+    <input type="text" name="Description" />
     <br />
+    <br />
+    @Html.DropDownList("updatedRole", new SelectList(ViewBag.AllRoles, "Value", "Text", (string) ViewBag.UserRole), null, new { @class = "form-control" })
     <br />
     <button class="btn btn-success">Actualizeaza profil</button>
 </form>

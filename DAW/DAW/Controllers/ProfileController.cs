@@ -1,4 +1,6 @@
 ﻿using DAW.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,7 +66,10 @@ namespace DAW.Controllers
         public ActionResult Edit(int id)
         {
             Profile profile = dbContext.Profiles.Find(id);
+            var userRoleId = profile.User.Roles.FirstOrDefault().RoleId;
             ViewBag.Profile = profile;
+            ViewBag.UserRole = userRoleId;
+            ViewBag.AllRoles = GetAllRoles();
             return View();
         }
 
@@ -74,12 +79,23 @@ namespace DAW.Controllers
         {
             try
             {
+                ApplicationDbContext localDbContext = new ApplicationDbContext();
+                var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(localDbContext));
+                var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(localDbContext));
                 Profile profile = dbContext.Profiles.Find(id);
                 if (TryUpdateModel(profile))
                 {
                     profile.Description = updatedProfile.Description;
                     dbContext.SaveChanges();
                 }
+
+                var roleId = profile.User.Roles.FirstOrDefault().RoleId;
+                IdentityRole userRole = dbContext.Roles.Find(roleId);
+                var selectedRole = dbContext.Roles.Find(HttpContext.Request.Params.Get("updatedRole"));
+
+                ApplicationUser user = profile.User;
+                userManager.RemoveFromRole(user.Id, userRole.Name);
+                userManager.AddToRole(user.Id, selectedRole.Name);
 
                 return RedirectToAction("Show", new { id = id });
             } catch (Exception e)
