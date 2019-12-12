@@ -20,6 +20,9 @@ namespace DAW.Controllers
                              select category;
 
             ViewBag.Categories = categories;
+            var user = System.Web.HttpContext.Current.User;
+            ViewBag.UserId = user.Identity.GetUserId();
+            ViewBag.IsUserAdmin = true; // user.IsInRole("Administrator");
             return View();
         }
 
@@ -31,6 +34,9 @@ namespace DAW.Controllers
                              select category;
 
             ViewBag.Categories = categories;
+            var user = System.Web.HttpContext.Current.User;
+            ViewBag.UserId = user.Identity.GetUserId();
+            ViewBag.IsUserAdmin = true; // user.IsInRole("Administrator");
             return View();
         }
 
@@ -39,8 +45,10 @@ namespace DAW.Controllers
             var categories = from category in dbContext.Categories
                              orderby category.Subjects.Count
                              select category;
-
             ViewBag.Categories = categories;
+            var user = System.Web.HttpContext.Current.User;
+            ViewBag.UserId = user.Identity.GetUserId();
+            ViewBag.IsUserAdmin = true; // user.IsInRole("Administrator");
             return View("~/Views/Category/Index.cshtml");
         }
 
@@ -104,7 +112,9 @@ namespace DAW.Controllers
 
             ViewBag.Category = category;
             ViewBag.Subjects = subjects;
-
+            var user = System.Web.HttpContext.Current.User;
+            ViewBag.UserId = user.Identity.GetUserId();
+            ViewBag.IsUserPrivileged = true; // user.IsInRole("Administrator") || user.IsInRole("Moderator");
             return View();
         }
 
@@ -117,7 +127,9 @@ namespace DAW.Controllers
 
             ViewBag.Category = category;
             ViewBag.Subjects = subjects;
-
+            var user = System.Web.HttpContext.Current.User;
+            ViewBag.UserId = user.Identity.GetUserId();
+            ViewBag.IsUserPrivileged = true; // user.IsInRole("Administrator") || user.IsInRole("Moderator");
             return View("~/Views/Category/Show.cshtml");
         }
 

@@ -57,6 +57,10 @@ namespace DAW.Controllers
             ViewBag.Subject = subject;
             ViewBag.Messages = messages;
 
+            var user = System.Web.HttpContext.Current.User;
+            ViewBag.UserId = user.Identity.GetUserId();
+            ViewBag.IsUserPrivileged = true;
+
             return View();
         }
 

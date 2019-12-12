@@ -19,7 +19,17 @@
     <h2>@subject.Title</h2>
     <p>@subject.Content</p>
     <a class="btn btn-success" href="/Subject/Show/@subject.Id">Afisare subiect</a>
-    <a class="btn btn-success" href="/Subject/Edit/@subject.Id">Editare subiect</a>
+    if (ViewBag.UserId != null)
+    {
+        if (ViewBag.UserId.Equals(subject.UserId) || ViewBag.IsUserPrivileged)
+        {
+            <a class="btn btn-success" href="/Subject/Edit/@subject.Id">Editare subiect</a>
+            <form method="post" action="/subject/delete/@subject.Id">
+                @Html.HttpMethodOverride(HttpVerbs.Delete)
+                <button class="btn btn-danger" type="submit">Stergere subiect</button>
+            </form>
+        }
+    }
     <br />
     <hr />
     <br />
