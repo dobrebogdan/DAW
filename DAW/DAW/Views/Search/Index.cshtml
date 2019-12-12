@@ -12,9 +12,13 @@
 
 
 <h2>Search</h2>
+<br />
+<br />
+<br />
 <form asp-controller="Category" asp-action="Index" method="post">
-    <p>
-        Title: <input type="text" name="SearchString" id="searchBox">
-        <input type="submit" value="Search Forum" onclick="searchTerm()"/>
-    </p>
+    <div class="form-group">
+        <label>Search keywords:</label>
+        <input type="text" class="form-control" name="SearchString" id="searchBox">
+        <input type="submit" class="btn-primary" value="Search Forum" onclick="searchTerm()" />
+    </div>
 </form>

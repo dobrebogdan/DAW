@@ -15,7 +15,7 @@
     <a class="btn btn-success" href="/message/edit/@message.Id">Editare mesaj</a>
     <form method="post" action="/message/delete/@message.Id">
         @Html.HttpMethodOverride(HttpVerbs.Delete)
-        <button class="btn btn-success" type="submit">Stergere mesaj</button>
+        <button class="btn btn-danger" type="submit">Stergere mesaj</button>
     </form>
     <br />
 }
