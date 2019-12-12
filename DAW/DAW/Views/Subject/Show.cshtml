@@ -14,11 +14,17 @@
 {
     <p>@message.Content</p>
     <a class="btn btn-success" href="/message/show/@message.Id">Afisare mesaj</a>
-    <a class="btn btn-success" href="/message/edit/@message.Id">Editare mesaj</a>
-    <form method="post" action="/message/delete/@message.Id">
-        @Html.HttpMethodOverride(HttpVerbs.Delete)
-        <button class="btn btn-danger" type="submit">Stergere mesaj</button>
-    </form>
+    if (ViewBag.UserId != null)
+    {
+        if (ViewBag.UserId.Equals(message.UserId) || ViewBag.IsUserPrivileged)
+        {
+        <a class="btn btn-success" href="/message/edit/@message.Id">Editare mesaj</a>
+        <form method="post" action="/message/delete/@message.Id">
+            @Html.HttpMethodOverride(HttpVerbs.Delete)
+            <button class="btn btn-danger" type="submit">Stergere mesaj</button>
+        </form>
+        }
+    }
     <br />
     <hr />
     <br />

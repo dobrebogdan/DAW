@@ -11,17 +11,24 @@
 <hr />
 <br />
 
+
 @foreach (var category in ViewBag.Categories)
 {
 //    @Html.Label("Name", "Nume Categorie")
     <h3> @category.Name </h3>
     <p>@category.Description</p>
     <a class="btn btn-success" href="/category/show/@category.Id">Afisare categorie</a>
-    <a class="btn btn-success" href="/category/edit/@category.Id">Editare categorie</a>
-    <form method="post" action="/category/delete/@category.Id">
-        @Html.HttpMethodOverride(HttpVerbs.Delete)
-        <button class="btn btn-danger" type="submit">Stergere categorie</button>
-    </form>
+    if (ViewBag.UserId != null)
+    {
+        if (ViewBag.UserId.Equals(category.UserId) || ViewBag.IsUserAdmin)
+        {
+        <a class="btn btn-success" href="/category/edit/@category.Id">Editare categorie</a>
+        <form method="post" action="/category/delete/@category.Id">
+            @Html.HttpMethodOverride(HttpVerbs.Delete)
+            <button class="btn btn-danger" type="submit">Stergere categorie</button>
+        </form>
+        }
+    }
     <br />
     <hr />
     <br />
