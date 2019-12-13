@@ -92,8 +92,11 @@ namespace DAW.Controllers
                 Profile profile = dbContext.Profiles.Find(id);
                 if (TryUpdateModel(profile))
                 {
-                    profile.Description = updatedProfile.Description;
-                    dbContext.SaveChanges();
+                    if (User.Identity.GetUserId() == profile.UserId)
+                    {
+                        profile.Description = updatedProfile.Description;
+                        dbContext.SaveChanges();
+                    }
                 }
 
                 var roleId = profile.User.Roles.FirstOrDefault().RoleId;
@@ -101,8 +104,11 @@ namespace DAW.Controllers
                 var selectedRole = dbContext.Roles.Find(HttpContext.Request.Params.Get("updatedRole"));
 
                 ApplicationUser user = profile.User;
-                userManager.RemoveFromRole(user.Id, userRole.Name);
-                userManager.AddToRole(user.Id, selectedRole.Name);
+                if (User.IsInRole("Administrator"))
+                {
+                    userManager.RemoveFromRole(user.Id, userRole.Name);
+                    userManager.AddToRole(user.Id, selectedRole.Name);
+                }
 
                 return RedirectToAction("Show", new { id = id });
             } catch (Exception e)
