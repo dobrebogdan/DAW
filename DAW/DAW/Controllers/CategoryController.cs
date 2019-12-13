@@ -20,9 +20,8 @@ namespace DAW.Controllers
                              select category;
 
             ViewBag.Categories = categories;
-            var user = System.Web.HttpContext.Current.User;
-            ViewBag.UserId = user.Identity.GetUserId();
-            ViewBag.IsUserAdmin = true; // user.IsInRole("Administrator");
+            ViewBag.UserId = User.Identity.GetUserId();
+            ViewBag.IsUserAdmin = User.IsInRole("Administrator");
             return View();
         }
 
@@ -34,9 +33,8 @@ namespace DAW.Controllers
                              select category;
 
             ViewBag.Categories = categories;
-            var user = System.Web.HttpContext.Current.User;
-            ViewBag.UserId = user.Identity.GetUserId();
-            ViewBag.IsUserAdmin = true; // user.IsInRole("Administrator");
+            ViewBag.UserId = User.Identity.GetUserId();
+            ViewBag.IsUserAdmin = User.IsInRole("Administrator");
             return View();
         }
 
@@ -46,9 +44,8 @@ namespace DAW.Controllers
                              orderby category.Subjects.Count
                              select category;
             ViewBag.Categories = categories;
-            var user = System.Web.HttpContext.Current.User;
-            ViewBag.UserId = user.Identity.GetUserId();
-            ViewBag.IsUserAdmin = true; // user.IsInRole("Administrator");
+            ViewBag.UserId = User.Identity.GetUserId();
+            ViewBag.IsUserAdmin = User.IsInRole("Administrator");
             return View("~/Views/Category/Index.cshtml");
         }
 
@@ -112,9 +109,9 @@ namespace DAW.Controllers
 
             ViewBag.Category = category;
             ViewBag.Subjects = subjects;
-            var user = System.Web.HttpContext.Current.User;
-            ViewBag.UserId = user.Identity.GetUserId();
-            ViewBag.IsUserPrivileged = true; // user.IsInRole("Administrator") || user.IsInRole("Moderator");
+
+            ViewBag.UserId = User.Identity.GetUserId();
+            ViewBag.IsUserPrivileged = User.IsInRole("Administrator") || User.IsInRole("Moderator");
             return View();
         }
 
@@ -128,8 +125,7 @@ namespace DAW.Controllers
             ViewBag.Category = category;
             ViewBag.Subjects = subjects;
             var user = System.Web.HttpContext.Current.User;
-            ViewBag.UserId = user.Identity.GetUserId();
-            ViewBag.IsUserPrivileged = true; // user.IsInRole("Administrator") || user.IsInRole("Moderator");
+            ViewBag.IsUserPrivileged = User.IsInRole("Administrator") || User.IsInRole("Moderator");
             return View("~/Views/Category/Show.cshtml");
         }
 
