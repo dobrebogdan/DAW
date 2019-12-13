@@ -35,6 +35,12 @@
 }
 
 <br />
-<a class="btn btn-info" href="/category/new"> Adauga categorie </a>
-<br />
+@if (ViewBag.UserId != null)
+{
+    if (ViewBag.IsUserAdmin)
+    {
+    <a class="btn btn-info" href="/category/new"> Adauga categorie </a>
+    <br />
+    }
+}
 
