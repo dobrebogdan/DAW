@@ -152,6 +152,7 @@ namespace DAW.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpDelete]
         public ActionResult Delete(int id)
         {
