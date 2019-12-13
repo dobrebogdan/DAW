@@ -10,13 +10,6 @@ namespace DAW.Models
     {
         public Subject() { }
 
-//        public Subject(int id, string title, string content)
-//        {
-//            Id = id;
-//            Title = title;
-//            Content = content;
-//        }
-
         [Key]
         public int Id { get; set; }
 

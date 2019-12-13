@@ -44,6 +44,13 @@ namespace DAW.Controllers
             return View();
         }
 
+        public ActionResult ShowByUser(string userId)
+        {
+            ApplicationUser user = dbContext.Users.Find(userId);
+            var profiles = from prf in dbContext.Profiles where user.Id == prf.UserId select prf;
+            return RedirectToAction("Show", new { id = profiles.First().Id });
+        }
+
         [NonAction]
         public IEnumerable<SelectListItem> GetAllRoles()
         {

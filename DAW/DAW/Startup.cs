@@ -1,8 +1,10 @@
-﻿using DAW.Models;
+﻿using DAW.Controllers;
+using DAW.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Owin;
+using System;
 
 [assembly: OwinStartupAttribute(typeof(DAW.Startup))]
 namespace DAW
@@ -40,6 +42,16 @@ namespace DAW
             		if (adminCreated.Succeeded)
             		{
             			userManager.AddToRole(user.Id, "Administrator");
+                    try
+                    {
+                        Profile profile = new Profile();
+                        profile.UserId = user.Id;
+                        profile.Description = "Admin profile";
+                        context.Profiles.Add(profile);
+                        context.SaveChanges();
+                    } catch (Exception e)
+                    {
+                    }
             		}
             	} 
              
