@@ -119,6 +119,12 @@ namespace DAW {
             );
 
             routes.MapRoute(
+                name: "Show profile by user id",
+                url: "profile/showbyuser/{userId}",
+                defaults: new { controller = "Profile", action = "ShowByUser" }
+            );
+
+            routes.MapRoute(
                 name: "Edit profile",
                 url: "profile/edit/{id}",
                 defaults: new { controller = "Profile", action = "Edit" }
