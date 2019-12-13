@@ -1,4 +1,5 @@
 ﻿using DAW.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,8 +43,15 @@ namespace DAW.Controllers
                 Message message = dbContext.Messages.Find(id);
                 if (TryUpdateModel(message))
                 {
-                    message.Content = updatedMessage.Content;
-                    message.SubjectId = updatedMessage.SubjectId;
+                    if (User.Identity.GetUserId() == message.UserId)
+                    {
+                        message.Content = updatedMessage.Content;
+                        message.SubjectId = updatedMessage.SubjectId;
+                    }
+                    else if (User.IsInRole("Administrator") || User.IsInRole("Moderator"))
+                    {
+                        message.SubjectId = updatedMessage.SubjectId;
+                    }
                     dbContext.SaveChanges();
                 }
 
@@ -54,14 +62,18 @@ namespace DAW.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrator,Moderator,User")]
         [HttpDelete]
         public ActionResult Delete(int id)
         {
             Message message = dbContext.Messages.Find(id);
             int subjectId = message.SubjectId;
 
-            dbContext.Messages.Remove(message);
-            dbContext.SaveChanges();
+            if (User.IsInRole("Administrator") || User.IsInRole("Moderator") || User.Identity.GetUserId() == message.UserId)
+            {
+                dbContext.Messages.Remove(message);
+                dbContext.SaveChanges();
+            }
 
             return RedirectToAction("Show", "Subject", new { id = subjectId });
         }

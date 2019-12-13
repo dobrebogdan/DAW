@@ -37,9 +37,12 @@ namespace DAW.Controllers
                 Subject subject = dbContext.Subjects.Find(id);
                 if (TryUpdateModel(subject))
                 {
-                    subject.Title = updatedSubject.Title;
-                    subject.Content = updatedSubject.Content;
-                    subject.CategoryId = updatedSubject.CategoryId;
+                    if (User.IsInRole("Administrator") || User.IsInRole("Moderator") || User.Identity.GetUserId() == subject.UserId)
+                    {
+                        subject.Title = updatedSubject.Title;
+                        subject.Content = updatedSubject.Content;
+                        subject.CategoryId = updatedSubject.CategoryId;
+                    }
                     dbContext.SaveChanges();
                 }
 
@@ -87,14 +90,18 @@ namespace DAW.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrator,Moderator,User")]
         [HttpDelete]
         public ActionResult Delete(int id)
         {
             Subject subject = dbContext.Subjects.Find(id);
             int categoryId = subject.CategoryId;
             
-            dbContext.Subjects.Remove(subject);
-            dbContext.SaveChanges();
+            if (User.IsInRole("Administrator") || User.IsInRole("Moderator") || User.Identity.GetUserId() == subject.UserId)
+            {
+                dbContext.Subjects.Remove(subject);
+                dbContext.SaveChanges();
+            }
 
             return RedirectToAction("Show", "Category", new { id = categoryId });
         }

@@ -63,6 +63,16 @@ namespace DAW.Controllers
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : "";
 
+            if (User.IsInRole("Administrator"))
+            {
+                ApplicationDbContext dbContext = new ApplicationDbContext();
+                var users = from usr in dbContext.Users select usr;
+                ViewBag.Users = users;
+            } else
+            {
+                ViewBag.Users = null;
+            }
+
             var userId = User.Identity.GetUserId();
             var model = new IndexViewModel
             {
