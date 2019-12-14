@@ -24,5 +24,17 @@
             }
             ]
         </dd>
+        <br />
+        @if (ViewBag.Profiles != null)
+        {
+        <dt> Manage profiles</dt>
+            foreach(var profile in ViewBag.Profiles)
+            {
+
+
+            <dd><a href="/Profile/Edit/@profile.Id">@profile.User.UserName</a></dd>
+            }
+        }
     </dl>
+
 </div>

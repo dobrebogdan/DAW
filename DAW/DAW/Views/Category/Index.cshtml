@@ -20,7 +20,7 @@
     <a class="btn btn-success" href="/category/show/@category.Id">Afisare categorie</a>
     if (ViewBag.UserId != null)
     {
-        if (ViewBag.UserId.Equals(category.UserId) || ViewBag.IsUserAdmin)
+        if (ViewBag.IsUserAdmin)
         {
         <a class="btn btn-success" href="/category/edit/@category.Id">Editare categorie</a>
         <form method="post" action="/category/delete/@category.Id">

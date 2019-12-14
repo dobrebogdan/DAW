@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using DAW.Models;
+using System.Collections.Generic;
 
 namespace DAW.Controllers
 {
@@ -66,11 +67,12 @@ namespace DAW.Controllers
             if (User.IsInRole("Administrator"))
             {
                 ApplicationDbContext dbContext = new ApplicationDbContext();
-                var users = from usr in dbContext.Users select usr;
-                ViewBag.Users = users;
+                var profiles = from profile in dbContext.Profiles select profile;
+                ViewBag.Profiles = profiles;
+               
             } else
             {
-                ViewBag.Users = null;
+                ViewBag.Profiles = null;
             }
 
             var userId = User.Identity.GetUserId();

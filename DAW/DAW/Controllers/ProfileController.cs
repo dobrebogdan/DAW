@@ -41,6 +41,7 @@ namespace DAW.Controllers
                                where user.Id == profile.UserId
                                join msg in dbContext.Messages on user.Id equals msg.UserId
                                select msg;
+            ViewBag.IsHisProfile = (User.Identity.GetUserId() == profile.UserId);
             return View();
         }
 

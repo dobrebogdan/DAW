@@ -20,4 +20,7 @@
     <br />
 }
 
-<a class="btn btn-success" href="/Manage">Manage your ACCOUNT, not profile (not this guy's, button needs to be moved)</a>
+@if (ViewBag.IsHisProfile)
+{
+    <a class="btn btn-primary" href="/Manage">Manage your account</a>
+}
