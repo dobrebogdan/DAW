@@ -12,6 +12,7 @@
     <dl>
         <!-- class="dl-horizontal"-->
         <dt>Password:</dt>
+        <br />
         <dd>
             [
             @if (Model.HasPassword)
@@ -24,15 +25,16 @@
             }
             ]
         </dd>
-        <br />
+        <hr />
         @if (ViewBag.Profiles != null)
         {
-        <dt> Manage profiles</dt>
-            foreach(var profile in ViewBag.Profiles)
+            <dt> Manage profiles</dt>
+            <br />
+            foreach (var profile in ViewBag.Profiles)
             {
 
 
-            <dd><a href="/Profile/Edit/@profile.Id">@profile.User.UserName</a></dd>
+                <dd><a href="/Profile/Edit/@profile.Id">@profile.User.UserName</a></dd>
             }
         }
     </dl>

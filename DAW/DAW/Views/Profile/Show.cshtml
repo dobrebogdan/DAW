@@ -1,13 +1,13 @@
 ﻿@{
-    ViewBag.Title = "Show";
+    ViewBag.Title = "Profile information";
 }
 
-<h2>Show</h2>
+<h2>@ViewBag.Title</h2>
 
 <h3>@ViewBag.Profile.Description</h3>
-
+<hr />
 <h2>Mesaje postate</h2>
-
+<br />
 @foreach(var message in ViewBag.Messages)
 {
     <p>@message.Content</p>
@@ -22,5 +22,7 @@
 
 @if (ViewBag.IsHisProfile)
 {
+    <hr />
     <a class="btn btn-primary" href="/Manage">Manage your account</a>
+    <hr />
 }
