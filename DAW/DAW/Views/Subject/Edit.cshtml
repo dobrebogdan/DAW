@@ -9,11 +9,11 @@
     @Html.HttpMethodOverride(HttpVerbs.Put)
     <label> Titlu subiect </label>
     <br />
-    <input type="text" name="Title" />
+    <input type="text" name="Title" value="@ViewBag.Subject.Title"/>
     <br />
     <label> Descriere subiect </label>
     <br />
-    <input type="text" name="Content" />
+    <input type="text" name="Content" value="@ViewBag.Subject.Content"/>
     <br />
     <label> Categorie </label>
     <br />

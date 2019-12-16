@@ -20,7 +20,6 @@ namespace DAW.Models
         [StringLength(20, ErrorMessage = "Titlul nu poate avea mai mult de 20 caractere")]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = "Descrierea subiectului este obligatorie")]
         public string Content { get; set; }
 
         public int CategoryId { get; set; }
