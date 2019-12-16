@@ -1,9 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "AddMessage";
+    ViewBag.Title = "Adauga Mesaj";
 }
 
-<h2>AddMessage</h2>
+<h2>@ViewBag.Title</h2>
 
 <form method="post" action="/subject/addmessage/@ViewBag.SubjectId">
     <input type="hidden" name="SubjectId" value="@ViewBag.SubjectId" />
