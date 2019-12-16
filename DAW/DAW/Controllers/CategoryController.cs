@@ -41,7 +41,7 @@ namespace DAW.Controllers
         public ActionResult IndexBySubjects()
         {
             var categories = from category in dbContext.Categories
-                             orderby category.Subjects.Count
+                             orderby -(category.Subjects.Count)
                              select category;
             ViewBag.Categories = categories;
             ViewBag.UserId = User.Identity.GetUserId();
@@ -125,6 +125,7 @@ namespace DAW.Controllers
             ViewBag.Category = category;
             ViewBag.Subjects = subjects;
             var user = System.Web.HttpContext.Current.User;
+            ViewBag.UserId = User.Identity.GetUserId();
             ViewBag.IsUserPrivileged = User.IsInRole("Administrator") || User.IsInRole("Moderator");
             return View("~/Views/Category/Show.cshtml");
         }
