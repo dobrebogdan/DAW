@@ -43,7 +43,7 @@ namespace DAW {
             routes.MapRoute(
                 name: "Category with subjects sorted by name",
                 url: "category/show/{id}",
-                defaults: new { controller = "Category", action = "Show" }
+                defaults: new { controller = "Category", action = "Show"}
             );
 
             routes.MapRoute(

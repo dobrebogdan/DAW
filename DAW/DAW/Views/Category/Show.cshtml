@@ -5,8 +5,8 @@
 <h2>@ViewBag.Title</h2>
 <br />
 
-<a class="btn btn-primary" href="/Category/show/@ViewBag.Category.Id">Sort by name</a>
-<a class="btn btn-primary" href="/Category/showbymessages/@ViewBag.Category.Id">Sort by number of messages</a>
+<a class="btn btn-primary" href="/Category/show/@ViewBag.Category.Id?page=@ViewBag.Page">Sort by name</a>
+<a class="btn btn-primary" href="/Category/showbymessages/@ViewBag.Category.Id?page=@ViewBag.Page">Sort by number of messages</a>
 
 <br />
 <hr />
@@ -17,12 +17,12 @@
 {
     <h2>@subject.Title</h2>
     <p>@subject.Content</p>
-    <button class="btn btn-success" href="/Subject/Show/@subject.Id">Afisare subiect</button>
+    <a class="btn btn-success" href="/Subject/Show/@subject.Id">Afisare subiect</a>
     if (ViewBag.UserId != null)
     {
         if (ViewBag.UserId.Equals(subject.UserId) || ViewBag.IsUserPrivileged)
         {
-            <button class="btn btn-success" href="/Subject/Edit/@subject.Id">Editare subiect</button>
+            <a class="btn btn-success" href="/Subject/Edit/@subject.Id">Editare subiect</a>
             <form method="post" action="/subject/delete/@subject.Id">
                 @Html.HttpMethodOverride(HttpVerbs.Delete)
                 <button class="btn btn-danger" type="submit">Stergere subiect</button>
@@ -37,21 +37,20 @@
 <br />
 <a class="btn btn-info" href="/category/addsubject/@ViewBag.Category.Id"> Adauga subiect </a>
 <br />
-
 <div>
     <nav aria-label="Page navigation">
         <ul class="pagination">
             <li>
-                <a href="/Category/Show/@ViewBag.Category.Id/?page=1" aria-label="Previous">
+                <a href="/Category/@ViewBag.ShowType/@ViewBag.Category.Id?page=1" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            @for (int i = 1; i <= ViewBag.lastPage; i++)
+            @for (int i = 1; i <= ViewBag.LastPage; i++)
             {
-                <li><a href="/Category/Show/@ViewBag.Category.Id/?page=@i">@(i)</a></li>
+                <li><a href="/Category/@ViewBag.ShowType/@ViewBag.Category.Id?page=@i">@(i)</a></li>
             }
             <li>
-                <a href="/Category/Show/@ViewBag.Category.Id/?page=@(ViewBag.lastPage)" aria-label="Next">
+                <a href="/Category/@ViewBag.ShowType/@ViewBag.Category.Id?page=@(ViewBag.LastPage)" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>

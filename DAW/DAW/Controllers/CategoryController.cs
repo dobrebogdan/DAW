@@ -112,18 +112,18 @@ namespace DAW.Controllers
 
             var offset = 0;
 
-            var paginatedSubjects = subjects.Skip(offset).Take(this._perPage);
-
             if (!currentPage.Equals(0))
             {
                 offset = (currentPage - 1) * this._perPage;
             }
 
+            var paginatedSubjects = subjects.Skip(offset).Take(this._perPage);
+
             ViewBag.Category = category;
             ViewBag.Subjects = paginatedSubjects;
-
-            ViewBag.lastPage = Math.Ceiling((float)totalItems / (float)this._perPage);
-
+            ViewBag.Page = currentPage;
+            ViewBag.LastPage = Math.Ceiling((float)totalItems / (float)this._perPage);
+            ViewBag.ShowType = "show";
             ViewBag.UserId = User.Identity.GetUserId();
             ViewBag.IsUserPrivileged = User.IsInRole("Administrator") || User.IsInRole("Moderator");
             return View();
@@ -141,21 +141,21 @@ namespace DAW.Controllers
 
             var offset = 0;
 
-            var paginatedSubjects = subjects.Skip(offset).Take(this._perPage);
 
             if (!currentPage.Equals(0))
             {
                 offset = (currentPage - 1) * this._perPage;
             }
 
+            var paginatedSubjects = subjects.Skip(offset).Take(this._perPage);
+
             ViewBag.Category = category;
             ViewBag.Subjects = paginatedSubjects;
-
-            ViewBag.lastPage = Math.Ceiling((float)totalItems / (float)this._perPage);
-
+            ViewBag.Page = currentPage;
+            ViewBag.LastPage = Math.Ceiling((float)totalItems / (float)this._perPage);
+            ViewBag.ShowType = "showbymessages";
             ViewBag.UserId = User.Identity.GetUserId();
-            ViewBag.IsUserPrivileged = User.IsInRole("Administrator") || User.IsInRole("Moderator");
-            return View("~/Views/Category/Show.cshtml");
+            ViewBag.IsUserPrivileged = User.IsInRole("Administrator") || User.IsInRole("Moderator");            return View("~/Views/Category/Show.cshtml");
         }
 
         [Authorize(Roles = "Administrator,Moderator,User")]
