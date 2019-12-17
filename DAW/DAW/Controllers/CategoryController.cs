@@ -12,7 +12,7 @@ namespace DAW.Controllers
     public class CategoryController : Controller
     {
         private ApplicationDbContext dbContext = new ApplicationDbContext();
-
+        private int _perPage = 3;
         public ActionResult Index()
         {
             var categories = from category in dbContext.Categories
@@ -107,8 +107,22 @@ namespace DAW.Controllers
                            orderby sub.Title
                            select sub;
 
+            var totalItems = subjects.Count();
+            var currentPage = Convert.ToInt32(Request.Params.Get("page"));
+
+            var offset = 0;
+
+            var paginatedSubjects = subjects.Skip(offset).Take(this._perPage);
+
+            if (!currentPage.Equals(0))
+            {
+                offset = (currentPage - 1) * this._perPage;
+            }
+
             ViewBag.Category = category;
-            ViewBag.Subjects = subjects;
+            ViewBag.Subjects = paginatedSubjects;
+
+            ViewBag.lastPage = Math.Ceiling((float)totalItems / (float)this._perPage);
 
             ViewBag.UserId = User.Identity.GetUserId();
             ViewBag.IsUserPrivileged = User.IsInRole("Administrator") || User.IsInRole("Moderator");
@@ -122,9 +136,23 @@ namespace DAW.Controllers
                            orderby -(sub.Messages.Count)
                            select sub;
 
+            var totalItems = subjects.Count();
+            var currentPage = Convert.ToInt32(Request.Params.Get("page"));
+
+            var offset = 0;
+
+            var paginatedSubjects = subjects.Skip(offset).Take(this._perPage);
+
+            if (!currentPage.Equals(0))
+            {
+                offset = (currentPage - 1) * this._perPage;
+            }
+
             ViewBag.Category = category;
-            ViewBag.Subjects = subjects;
-            var user = System.Web.HttpContext.Current.User;
+            ViewBag.Subjects = paginatedSubjects;
+
+            ViewBag.lastPage = Math.Ceiling((float)totalItems / (float)this._perPage);
+
             ViewBag.UserId = User.Identity.GetUserId();
             ViewBag.IsUserPrivileged = User.IsInRole("Administrator") || User.IsInRole("Moderator");
             return View("~/Views/Category/Show.cshtml");
