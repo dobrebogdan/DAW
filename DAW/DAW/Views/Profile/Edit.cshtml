@@ -1,4 +1,4 @@
-﻿
+﻿@model DAW.Models.Profile
 @{
     ViewBag.Title = "Edit";
 }
@@ -10,6 +10,7 @@
     <label>Descriere</label>
     <br />
     <input type="text" name="Description" value="@ViewBag.Profile.Description"/>
+    @Html.ValidationMessageFor(m => m.Description, null, new { @class = "text-danger" })
     <br />
     <br />
     @Html.DropDownList("updatedRole", new SelectList(ViewBag.AllRoles, "Value", "Text", (string) ViewBag.UserRole), null, new { @class = "form-control" })

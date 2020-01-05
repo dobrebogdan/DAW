@@ -1,4 +1,4 @@
-﻿
+﻿@model DAW.Models.Profile
 @{
     ViewBag.Title = "New";
 }
@@ -10,6 +10,7 @@
     <label> Descriere </label>
     <br />
     <input type="text" name="Description" />
+    @Html.ValidationMessageFor(m => m.Description, null, new { @class = "text-danger" })
     <br />
     <br />
     <button class="btn btn-primary">Creeaza profil</button>

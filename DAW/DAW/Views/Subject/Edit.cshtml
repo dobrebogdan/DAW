@@ -1,4 +1,4 @@
-﻿
+﻿@model DAW.Models.Subject
 @{
     ViewBag.Title = "Edit";
 }
@@ -10,10 +10,12 @@
     <label> Titlu subiect </label>
     <br />
     <input type="text" name="Title" value="@ViewBag.Subject.Title"/>
+    @Html.ValidationMessageFor(m => m.Title, null, new { @class = "text-danger" })
     <br />
     <label> Descriere subiect </label>
     <br />
     <input type="text" name="Content" value="@ViewBag.Subject.Content"/>
+    @Html.ValidationMessageFor(m => m.Content, null, new { @class = "text-danger" })
     <br />
     <label> Categorie </label>
     <br />

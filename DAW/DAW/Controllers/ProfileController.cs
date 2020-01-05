@@ -24,9 +24,17 @@ namespace DAW.Controllers
         {
             try
             {
-                dbContext.Profiles.Add(profile);
-                dbContext.SaveChanges();
-                return RedirectToAction("Show", new { id = profile.Id });
+                if (ModelState.IsValid)
+                {
+                    dbContext.Profiles.Add(profile);
+                    dbContext.SaveChanges();
+                    return RedirectToAction("Show", new { id = profile.Id });
+                }
+                else
+                {
+                    ViewBag.UserId = profile.UserId;
+                    return View();
+                }
             } catch (Exception e)
             {
                 return View();
@@ -91,27 +99,38 @@ namespace DAW.Controllers
                 var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(localDbContext));
                 var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(localDbContext));
                 Profile profile = dbContext.Profiles.Find(id);
-                if (TryUpdateModel(profile))
+                if (ModelState.IsValid)
                 {
-                    if (User.Identity.GetUserId() == profile.UserId)
+                    if (TryUpdateModel(profile))
                     {
-                        profile.Description = updatedProfile.Description;
-                        dbContext.SaveChanges();
+//                        if (User.Identity.GetUserId() == profile.UserId)
+//                        {
+                            profile.Description = updatedProfile.Description;
+                            dbContext.SaveChanges();
+//                        }
                     }
+
+                    var roleId = profile.User.Roles.FirstOrDefault().RoleId;
+                    IdentityRole userRole = dbContext.Roles.Find(roleId);
+                    var selectedRole = dbContext.Roles.Find(HttpContext.Request.Params.Get("updatedRole"));
+
+                    ApplicationUser user = profile.User;
+                    if (User.IsInRole("Administrator"))
+                    {
+                        userManager.RemoveFromRole(user.Id, userRole.Name);
+                        userManager.AddToRole(user.Id, selectedRole.Name);
+                    }
+
+                    return RedirectToAction("Show", new { id = id });
                 }
-
-                var roleId = profile.User.Roles.FirstOrDefault().RoleId;
-                IdentityRole userRole = dbContext.Roles.Find(roleId);
-                var selectedRole = dbContext.Roles.Find(HttpContext.Request.Params.Get("updatedRole"));
-
-                ApplicationUser user = profile.User;
-                if (User.IsInRole("Administrator"))
+                else
                 {
-                    userManager.RemoveFromRole(user.Id, userRole.Name);
-                    userManager.AddToRole(user.Id, selectedRole.Name);
+                    var userRoleId = profile.User.Roles.FirstOrDefault().RoleId;
+                    ViewBag.Profile = profile;
+                    ViewBag.UserRole = userRoleId;
+                    ViewBag.AllRoles = GetAllRoles();
+                    return View();
                 }
-
-                return RedirectToAction("Show", new { id = id });
             } catch (Exception e)
             {
                 return View();

@@ -64,16 +64,26 @@ namespace DAW.Controllers
             try
             {
                 Category category = dbContext.Categories.Find(id);
-                if (TryUpdateModel(category))
+                if (ModelState.IsValid)
                 {
-                    category.Name = updatedCategory.Name;
-                    category.Description = updatedCategory.Description;
-                    dbContext.SaveChanges();
+                    if (TryUpdateModel(category))
+                    {
+                        category.Name = updatedCategory.Name;
+                        category.Description = updatedCategory.Description;
+                        dbContext.SaveChanges();
+                    }
+                
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.Category = updatedCategory;
+                    return View();
                 }
 
-                return RedirectToAction("Index");
             } catch (Exception e)
             {
+                ViewBag.Category = updatedCategory;
                 return View();
             }
         }
@@ -91,11 +101,20 @@ namespace DAW.Controllers
         {
             try
             {
-                dbContext.Categories.Add(category);
-                dbContext.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    dbContext.Categories.Add(category);
+                    dbContext.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.UserId = category.UserId;
+                    return View();
+                }
             } catch(Exception e)
             {
+                ViewBag.UserId = category.UserId;
                 return View();
             }
         }

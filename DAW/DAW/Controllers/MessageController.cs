@@ -41,24 +41,35 @@ namespace DAW.Controllers
             try
             {
                 Message message = dbContext.Messages.Find(id);
-                if (TryUpdateModel(message))
+                if (ModelState.IsValid)
                 {
-                    if (User.Identity.GetUserId() == message.UserId)
+                    if (TryUpdateModel(message))
                     {
-                        message.Content = updatedMessage.Content;
-                        message.SubjectId = updatedMessage.SubjectId;
+                        if (User.Identity.GetUserId() == message.UserId)
+                        {
+                            message.Content = updatedMessage.Content;
+                            message.SubjectId = updatedMessage.SubjectId;
+                        }
+                        else if (User.IsInRole("Administrator") || User.IsInRole("Moderator"))
+                        {
+                            message.SubjectId = updatedMessage.SubjectId;
+                        }
+                        dbContext.SaveChanges();
                     }
-                    else if (User.IsInRole("Administrator") || User.IsInRole("Moderator"))
-                    {
-                        message.SubjectId = updatedMessage.SubjectId;
-                    }
-                    dbContext.SaveChanges();
+                
+                    return RedirectToAction("Show", new { id = id });
+                }
+                else
+                {
+                    ViewBag.Message = message;
+                    ViewBag.Subject = message.Subject;
+                    ViewBag.Subjects = from sub in message.Subject.Category.Subjects select sub;
+                    return View();
                 }
 
-                return RedirectToAction("Show", new { id = id });
             } catch (Exception e)
             {
-                return View();
+                return RedirectToAction("Show", new { id = id });
             }
         }
 

@@ -1,4 +1,4 @@
-﻿
+﻿@model DAW.Models.Message
 @{
     ViewBag.Title = "Edit";
 }
@@ -10,6 +10,7 @@
     <label> Mesaj </label>
     <br />
     <input type="text" name="Content" value="@ViewBag.Message.Content"/>
+    @Html.ValidationMessageFor(m => m.Content, null, new { @class = "text-danger" })
     <br />
     <br />
     <label> Subiect </label>

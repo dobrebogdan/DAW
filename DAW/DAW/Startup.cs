@@ -38,7 +38,7 @@ namespace DAW
             		user.UserName = "admin@admin.com";
             		user.Email = "admin@admin.com"; 
              
-                var adminCreated = userManager.Create(user, "Administrator1!");
+                    var adminCreated = userManager.Create(user, "Administrator1!");
             		if (adminCreated.Succeeded)
             		{
             			userManager.AddToRole(user.Id, "Administrator");

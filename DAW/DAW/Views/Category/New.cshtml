@@ -1,4 +1,4 @@
-﻿
+﻿@model DAW.Models.Category
 @{
     ViewBag.Title = "New";
 }
@@ -11,10 +11,12 @@
     <label> Nume categorie </label>
     <br />
     <input type="text" name="Name" />
+    @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
     <br />
     <label> Descriere categorie </label>
     <br />
     <input type="text" name="Description" />
+    @Html.ValidationMessageFor(m => m.Description, null, new { @class = "text-danger" })
     <br />
     <br />
     <button class="btn btn-primary" type="submit">Adauga Categorie</button>

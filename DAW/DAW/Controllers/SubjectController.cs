@@ -35,18 +35,28 @@ namespace DAW.Controllers
             try
             {
                 Subject subject = dbContext.Subjects.Find(id);
-                if (TryUpdateModel(subject))
+                if (ModelState.IsValid)
                 {
-                    if (User.IsInRole("Administrator") || User.IsInRole("Moderator") || User.Identity.GetUserId() == subject.UserId)
+                    if (TryUpdateModel(subject))
                     {
-                        subject.Title = updatedSubject.Title;
-                        subject.Content = updatedSubject.Content;
-                        subject.CategoryId = updatedSubject.CategoryId;
+                        if (User.IsInRole("Administrator") || User.IsInRole("Moderator") || User.Identity.GetUserId() == subject.UserId)
+                        {
+                            subject.Title = updatedSubject.Title;
+                            subject.Content = updatedSubject.Content;
+                            subject.CategoryId = updatedSubject.CategoryId;
+                        }
+                        dbContext.SaveChanges();
                     }
-                    dbContext.SaveChanges();
+    
+                    return RedirectToAction("Show", new { id = id });
                 }
-
-                return RedirectToAction("Show", new { id = id });
+                else
+                {
+                    ViewBag.Subject = subject;
+                    ViewBag.Categories = from category in dbContext.Categories select category;
+                    ViewBag.Category = subject.Category;
+                    return View();
+                }
             } catch (Exception e)
             {
                 return View();
@@ -81,9 +91,18 @@ namespace DAW.Controllers
         {
             try
             {
-                dbContext.Messages.Add(message);
-                dbContext.SaveChanges();
-                return RedirectToAction("Show", new { id = message.SubjectId });
+                if (ModelState.IsValid)
+                {
+                    dbContext.Messages.Add(message);
+                    dbContext.SaveChanges();
+                    return RedirectToAction("Show", new { id = message.SubjectId });
+                }
+                else
+                {
+                    ViewBag.SubjectId = message.SubjectId;
+                    ViewBag.UserId = User.Identity.GetUserId();
+                    return View();
+                }
             } catch (Exception e)
             {
                 return View();

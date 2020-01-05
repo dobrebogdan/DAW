@@ -1,4 +1,4 @@
-﻿
+﻿@model DAW.Models.Category
 @{
     ViewBag.Title = "Edit";
 }
@@ -10,10 +10,12 @@
     <label> Nume categorie </label>
     <br />
     <input type="text" name="Name" value="@ViewBag.Category.Name"/>
+    @Html.ValidationMessageFor(m => m.Name, null, new { @class = "text-danger" })
     <br />
     <label> Descriere categorie </label>
     <br />
     <input type="text" name="Description" value="@ViewBag.Category.Description"/>
+    @Html.ValidationMessageFor(m => m.Description, null, new { @class = "text-danger" })
     <br />
     <br />
     <button class="btn btn-success" type="submit">Actualizeaza Categorie</button>
