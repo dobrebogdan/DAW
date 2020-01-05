@@ -172,11 +172,22 @@ namespace DAW.Controllers
         {
             try
             {
-                dbContext.Subjects.Add(subject);
-                dbContext.SaveChanges();
-                return RedirectToAction("Show", new { id = subject.CategoryId });
+                if (ModelState.IsValid)
+                {
+                    dbContext.Subjects.Add(subject);
+                    dbContext.SaveChanges();
+                    return RedirectToAction("Show", new { id = subject.CategoryId });
+                }
+                else
+                {
+                    ViewBag.CategoryId = subject.CategoryId;
+                    ViewBag.UserId = subject.UserId;
+                    return View();
+                }
             } catch (Exception e)
             {
+                ViewBag.CategoryId = subject.CategoryId;
+                ViewBag.UserId = subject.UserId;
                 return View();
             }
         }

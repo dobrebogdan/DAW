@@ -16,10 +16,10 @@ namespace DAW.Models
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
 
-        [Required(ErrorMessage = "Titlul este obligatoriu")]
-        [StringLength(20, ErrorMessage = "Titlul nu poate avea mai mult de 20 caractere")]
+        [Required(ErrorMessage = "Subiectul trebuie sa aiba titlu")]
         public string Title { get; set; }
 
+        [Required(ErrorMessage = "Subiectul trebuie sa aiba continut")]
         public string Content { get; set; }
 
         public int CategoryId { get; set; }
